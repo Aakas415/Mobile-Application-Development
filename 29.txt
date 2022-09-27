@@ -1,0 +1,143 @@
+Practical No - 29
+SMS
+XML - 
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter Mobile No - "
+        android:id="@+id/txt1"
+        android:layout_marginTop="150dp"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:layout_marginLeft="20dp"
+         />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Here"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginRight="25dp"
+        android:id="@+id/edtNumber"
+        android:textSize="20dp">
+    </EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter Message - "
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:layout_marginTop="280dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp">
+    </TextView>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Here"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="330dp"
+        android:layout_marginRight="25dp"
+        android:id="@+id/editTextSMS"
+        android:textSize="20dp">
+    </EditText>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonSend"
+        android:text="Send Message"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="400dp">
+    </Button>
+</RelativeLayout>
+
+JAVA - 
+package com.example.sendrecivesmsapp;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button buttonSend;
+    EditText edtTextSMS, edtNumber;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        buttonSend = (Button) findViewById(R.id.buttonSend);
+        edtTextSMS = (EditText) findViewById(R.id.editTextSMS);
+        edtNumber = (EditText) findViewById(R.id.edtNumber);
+
+        buttonSend.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                try {
+
+                    Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                    sendIntent.putExtra("sms_body", edtTextSMS.getText()
+                            .toString());
+                    sendIntent.putExtra("address", edtNumber.getText()
+                            .toString());
+                    sendIntent.setType("vnd.android-dir/mms-sms");
+                    startActivity(sendIntent);
+
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(),"SMS faild, please try again later!",
+                            Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+    }
+
+
+}
+
+Manifeast -
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.sendrecivesmsapp">
+    <uses-permission android:name="android.permission.SEND_SMS">
+    </uses-permission>
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SendReciveSMSApp">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

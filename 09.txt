@@ -1,0 +1,51 @@
+MAD Practical 09
+XML - 
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+<ToggleButton
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="250dp"
+    android:textOff="Off"
+    android:textOn="On"
+    android:id="@+id/t1"
+    />
+</RelativeLayout>
+
+JAVA-
+
+package com.example.pr10;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Toast;
+import android.widget.ToggleButton;
+
+public class MainActivity extends AppCompatActivity {
+    ToggleButton t1;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        t1 = findViewById(R.id.t1);
+        t1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(t1.isChecked()) {
+                    Toast.makeText(getApplicationContext(), "Button is On", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+}

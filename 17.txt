@@ -1,0 +1,79 @@
+Practical No 17 Log.d
+
+XML - 
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:textStyle="bold"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="100dp"
+        android:textSize="40dp"
+
+        />
+
+</RelativeLayout>
+
+Java - 
+
+package com.example.pr20;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.util.Log;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Log.d("Activity: ","Created");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("Activity: ","Started");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("Activity: ","Resume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("Activity: ","Pause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("Activity: ","Stop");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("Activity: ","Restart");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("Activity: ","Destroy");
+    }
+}
+
